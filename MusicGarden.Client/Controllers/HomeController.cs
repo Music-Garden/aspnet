@@ -25,14 +25,16 @@ namespace Medialab.Client.Controllers
 
     public IActionResult Index()
     {
-      var response = client.GetAsync($"{_configuration["Services:webapi"]}/Music").GetAwaiter().GetResult();
-      List<string> result = null;
+      var response = client.GetAsync($"{_configuration["Services:webapi"]}/Music/search").GetAwaiter().GetResult();
+      string result = null;
 
 
       if (response.IsSuccessStatusCode)
       {
-        result = JsonConvert.DeserializeObject<List<String>>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-        ViewBag.Music = result;
+        result = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+        var path = result.Substring(22);
+        ViewBag.Music = path;
 
         return View("index");
       }
