@@ -46,11 +46,13 @@ namespace MusicGarden.Client.Controllers
         return View("song", Searched);
       else if (ModelState.IsValid)
       {
-        var response = client.GetAsync($"{_configuration["Services:webapi"]}/music/search?q={Searched.search}").GetAwaiter().GetResult();
+        var response = client.GetAsync($"{_configuration["Services:webapi"]}/music/search?name={Searched.search}").GetAwaiter().GetResult();
+        //var response = client.GetAsync($"https://localhost:5001/music/search?name=LG").GetAwaiter().GetResult();
         if (response.IsSuccessStatusCode)
         {
-          var searchResults = JsonConvert.DeserializeObject<JsonObjectAttribute>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-          return View("songresults", searchResults);
+          List<string> searchResults = JsonConvert.DeserializeObject<List<string>>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+          ViewBag.SearchResults = searchResults;
+          return View("songresults");
         }
       }
 

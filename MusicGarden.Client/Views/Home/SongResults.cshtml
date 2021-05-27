@@ -1,1 +1,14 @@
 <h2>Search Results</h2>
+
+@if (ViewBag.SearchResults.Count == 0)
+{
+  @: no results found!
+}
+<ul>
+  @foreach (var item in ViewBag.SearchResults)
+  {
+    <li>
+      @item
+    </li>
+  }
+</ul>
