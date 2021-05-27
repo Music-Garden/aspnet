@@ -1,11 +1,11 @@
 using System;
 
-namespace Medialab.Client.Models
+namespace MusicGarden.Client.Models
 {
-    public class ErrorViewModel
-    {
-        public string RequestId { get; set; }
+  public class ErrorViewModel
+  {
+    public string RequestId { get; set; }
 
-        public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
-    }
+    public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
+  }
 }

@@ -5,14 +5,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Medialab.Client.Models;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using MusicGarden.Client.Models;
 
-namespace Medialab.Client.Controllers
+namespace MusicGarden.Client.Controllers
 {
+
+  [Route("[controller]/[action]")]
   public class HomeController : Controller
   {
 
@@ -22,23 +24,53 @@ namespace Medialab.Client.Controllers
     {
       _configuration = configuration;
     }
-
     public IActionResult Index()
     {
       var response = client.GetAsync($"{_configuration["Services:webapi"]}/Music").GetAwaiter().GetResult();
-      List<string> result = null;
+      //string result = null;
 
 
       if (response.IsSuccessStatusCode)
       {
-        result = JsonConvert.DeserializeObject<List<String>>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+        var result = JsonConvert.DeserializeObject<JsonObjectAttribute>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
         ViewBag.Music = result;
-
         return View("index");
       }
 
       return null;
 
+    }
+    public IActionResult Song(SongModel Searched)
+    {
+      if (Searched.search == null)
+        return View("song", Searched);
+      else if (ModelState.IsValid)
+      {
+        var response = client.GetAsync($"{_configuration["Services:webapi"]}/music/search?q={Searched.search}").GetAwaiter().GetResult();
+        if (response.IsSuccessStatusCode)
+        {
+          var searchResults = JsonConvert.DeserializeObject<JsonObjectAttribute>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+          return View("songresults", searchResults);
+        }
+      }
+
+
+      return View("index"); //to see if errors are thrown 
+    }
+    public IActionResult Search(SongModel search)
+    {
+      if (search == null)
+        return View("index");
+      else if (ModelState.IsValid)
+      {
+        var response = client.GetAsync($"{_configuration["Services:webapi"]}/music/{search}").GetAwaiter().GetResult();
+        if (response.IsSuccessStatusCode)
+        {
+          var searchResults = JsonConvert.DeserializeObject<JsonObjectAttribute>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+          return View("songresults", searchResults);
+        }
+      }
+      return View("index", new ErrorViewModel());
     }
 
     public IActionResult Privacy()
