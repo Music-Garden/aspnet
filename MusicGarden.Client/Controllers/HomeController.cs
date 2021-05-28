@@ -47,11 +47,15 @@ namespace MusicGarden.Client.Controllers
       else if (ModelState.IsValid)
       {
         var response = client.GetAsync($"{_configuration["Services:webapi"]}/music/search?name={Searched.search}").GetAwaiter().GetResult();
-        //var response = client.GetAsync($"https://localhost:5001/music/search?name=LG").GetAwaiter().GetResult();
         if (response.IsSuccessStatusCode)
         {
           List<string> searchResults = JsonConvert.DeserializeObject<List<string>>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-          ViewBag.SearchResults = searchResults;
+          List<string> searchRes = new List<string>();
+          foreach (var item in searchResults)
+          {
+            searchRes.Add(item.Substring(23));
+          }
+          ViewBag.SearchResults = searchRes;
           return View("songresults");
         }
       }
@@ -59,22 +63,6 @@ namespace MusicGarden.Client.Controllers
 
       return View("index"); //to see if errors are thrown 
     }
-    public IActionResult Search(SongModel search)
-    {
-      if (search == null)
-        return View("index");
-      else if (ModelState.IsValid)
-      {
-        var response = client.GetAsync($"{_configuration["Services:webapi"]}/music/{search}").GetAwaiter().GetResult();
-        if (response.IsSuccessStatusCode)
-        {
-          var searchResults = JsonConvert.DeserializeObject<JsonObjectAttribute>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-          return View("songresults", searchResults);
-        }
-      }
-      return View("index", new ErrorViewModel());
-    }
-
     public IActionResult Privacy()
     {
       return View();
