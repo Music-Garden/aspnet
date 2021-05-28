@@ -26,18 +26,8 @@ namespace MusicGarden.Client.Controllers
     }
     public IActionResult Index()
     {
-      var response = client.GetAsync($"{_configuration["Services:webapi"]}/Music").GetAwaiter().GetResult();
-      //string result = null;
 
-
-      if (response.IsSuccessStatusCode)
-      {
-        var result = JsonConvert.DeserializeObject<JsonObjectAttribute>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
-        ViewBag.Music = result;
-        return View("index");
-      }
-
-      return null;
+      return View("index");
 
     }
     public IActionResult Song(SongModel Searched)
@@ -63,6 +53,11 @@ namespace MusicGarden.Client.Controllers
 
       return View("index"); //to see if errors are thrown 
     }
+    public IActionResult Playlist()
+    {
+      return View("playlist");
+    }
+
     public IActionResult Privacy()
     {
       return View();

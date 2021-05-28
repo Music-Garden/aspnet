@@ -3,15 +3,9 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Music Garden</h1>
 </div>
-
-<h2>Movies</h2>
-
-<ul>
-@foreach (var item in ViewBag.Music)
-{
-        <p>@item</p>
-}
-</ul>
+<div class="col">
+    <a href="/home/playlist">Play from a Playlist</a>
+    <a href="/home/song">Search for a Song</a>
+</div>

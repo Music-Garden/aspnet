@@ -1,0 +1,15 @@
+@model MusicGarden.Client.Models.PlaylistModel;
+
+<div class="text-center">
+  <h1 class="display-4">Music Garden</h1>
+</div>
+
+<form action="/home/playlist" method="get">
+  <div class="form-group">
+    <label for="playlistname">Playlist</label>
+    <input type="text" class="form-control" placeholder="Enter the playlist name" asp-for="playlistname">
+  </div>
+  <button type="submit">Submit</button>
+</form>
+<ul>
+</ul>
