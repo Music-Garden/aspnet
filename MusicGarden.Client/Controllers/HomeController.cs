@@ -66,6 +66,10 @@ namespace MusicGarden.Client.Controllers
 
     public IActionResult Playlist(PlaylistModel PSearch)
     {
+      if (PSearch.playlistname == null)
+      {
+        return View("Playlist", PSearch);
+      }
       var response = client.GetAsync($"{_configuration["Services:webapi"]}/music/ReadPlaylist?pname={PSearch.playlistname}").GetAwaiter().GetResult();
       if (response.IsSuccessStatusCode)
       {
