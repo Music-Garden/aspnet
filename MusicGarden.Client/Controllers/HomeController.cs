@@ -53,9 +53,32 @@ namespace MusicGarden.Client.Controllers
 
       return View("index"); //to see if errors are thrown 
     }
-    public IActionResult Playlist()
+    public string Saving(SavingModel PSearch)
     {
-      return View("playlist");
+      var response = client.GetAsync($"{_configuration["Services:webapi"]}/music/saveplaylist?PlaylistName={PSearch.playlistname}&Track={PSearch.track}").GetAwaiter().GetResult();
+      if (response.IsSuccessStatusCode)
+      {
+        string resultSuccess = JsonConvert.DeserializeObject<string>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+        return resultSuccess;
+      }
+      return "Failed";
+    }
+
+    public IActionResult Playlist(PlaylistModel PSearch)
+    {
+      var response = client.GetAsync($"{_configuration["Services:webapi"]}/music/ReadPlaylist?pname={PSearch.playlistname}").GetAwaiter().GetResult();
+      if (response.IsSuccessStatusCode)
+      {
+        List<string> searchResults = JsonConvert.DeserializeObject<List<string>>(response.Content.ReadAsStringAsync().GetAwaiter().GetResult());
+        List<string> searchRes = new List<string>();
+        foreach (var item in searchResults)
+        {
+          searchRes.Add("track/" + item);
+        }
+        ViewBag.Playlist = searchRes;
+        return View("YourPlaylist");
+      }
+      return View("index");
     }
 
     public IActionResult Privacy()
