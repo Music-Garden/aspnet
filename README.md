@@ -38,7 +38,7 @@ Git clone https://github.com/Music-Garden/webapi.git
 
 #Environments
 
-*Microsoft Azure and Microsoft SQL Server
+* Microsoft Azure and Microsoft SQL Server
 
 - Images of what it should look like
 
@@ -58,13 +58,13 @@ When running the Web API in conjunction with this project, you will be able to i
 
 ## Contributors
 
-*Marcangy Cange
-*Seth Larson
-*Jacob Polivka
+* Marcangy Cange
+* Seth Larson
+* Jacob Polivka
 
 ## Other Repos
 
-*https://github.com/Music-Garden/webapi
+* https://github.com/Music-Garden/webapi
 
 ## License
 
