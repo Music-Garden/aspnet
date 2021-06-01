@@ -11,10 +11,10 @@ Music garden is a digital music service that gives you access to millions of son
 * SQL Server
 * ADO.Net Entity Framework
 * HTML
-*CSS
-*ASP.NET Web API
-*Javascript
-*Microsoft Azure
+* CSS
+* ASP.NET Web API
+* Javascript
+* Microsoft Azure
 
 
 ## Features
