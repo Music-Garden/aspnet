@@ -1,49 +1,71 @@
-# PROJECT NAME
+# Music Garden
 
 ## Project Description
 
 Music garden is a digital music service that gives you access to millions of songs and other content from creators all over the world. The user would be able to add and remove songs to a playlist and save and share the playlist via a token. Search songs by artist, Album, genre, or song name.
 
+
 ## Technologies Used
 
-* ASP.NET MVC
+* ASP.NET MVC 
 * SQL Server
 * ADO.Net Entity Framework
-* 
-* Tech 2 - version 2.0
-* Tech 3 - version 3.0
+* HTML
+*CSS
+*ASP.NET Web API
+*Javascript
+*Microsoft Azure
+
 
 ## Features
 
-List of features ready and TODOs for future development
-* Awesome feature 1
-* Awesome feature 2
-* Awesome feature 3
+* Songs can be searched for using the Deezer API.
+* Songs can be played and previewed by using the Deezer API.
 
 To-do list:
-* Wow improvement to be done 1
-* Wow improvement to be done 2
+* User’s can make an Account to have their own personal Playlists and Favorite Songs
+* Bug fixing our remote web api application to properly save a playlist
+* Create algorithms to calculate Top Songs Played for the Day/Week/Month/All Time
+
 
 ## Getting Started
-   
+
 (include git clone command)
-(include all environment setup steps)
+Git clone https://github.com/Music-Garden/aspnet.git
 
-> Be sure to include BOTH Windows and Unix command  
-> Be sure to mention if the commands only work on a specific platform (eg. AWS, GCP)
+Git clone https://github.com/Music-Garden/webapi.git
 
-- All the `code` required to get started
+
+#Environments
+
+*Microsoft Azure and Microsoft SQL Server
+
 - Images of what it should look like
+
 
 ## Usage
 
-> Here, you instruct other people on how to use your project after they’ve installed it. This would also be a good place to include screenshots of your project in action.
+
+If you wish to use it on the web rather than locally, then once the project is cloned, create the docker repositories necessary for both the webapi and aspnet repositories. Grab the docker user token for use in the github-action pipeline, and store in your github secrets.
+Create two Azure WebApp services, and grab the related AZURE.CREDENTIALS by following this walkthrough: https://github.com/marketplace/actions/azure-login.
+The connection to the WebAPI will need to be adjusted for whether you may be running the project locally, or online. This can be found in the aspnet project, in MusicGarden.Client/appsettings.json. Change the webapi url as needed.
+
+When the aspnet project is running, you should be greeted with this webpage upon going to the hosted url routed to home/index, shown below.
+
+Upon choosing to Search for a Song, you will be greeted with this screen:
+
+When running the Web API in conjunction with this project, you will be able to input a search query and should receive results based on your query, similar to this below:
 
 ## Contributors
 
-> Here list the people who have contributed to this project. (ignore this section, if its a solo project)
+*Marcangy Cange
+*Seth Larson
+*Jacob Polivka
+
+## Other Repos
+
+*https://github.com/Music-Garden/webapi
 
 ## License
 
-This project uses the following license: [<license_name>](<link>).
-
+This project uses the following license: MIT.
