@@ -2,11 +2,14 @@
 
 ## Project Description
 
-Here goes your awesome project description!
+Music garden is a digital music service that gives you access to millions of songs and other content from creators all over the world. The user would be able to add and remove songs to a playlist and save and share the playlist via a token. Search songs by artist, Album, genre, or song name.
 
 ## Technologies Used
 
-* Tech 1 - version 1.0
+* ASP.NET MVC
+* SQL Server
+* ADO.Net Entity Framework
+* 
 * Tech 2 - version 2.0
 * Tech 3 - version 3.0
 
